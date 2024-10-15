@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="temaFondo" >
+        <item name="android:backgroundTint">#1B1B1B</item>
+
+
+    </style>
+
+    <style name="botonNumero">
+        <item name="android:backgroundTint">#3CFF33</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#000000</item>
+
+    </style>
+
+    <style name="botonCE">
+        <item name="android:backgroundTint">#E91E63</item>
+        <item name="android:textSize">30sp</item>
+
+    </style>
+
+
+
+    <style name="valorCrypto">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:textAlignment">viewEnd</item>
+    </style>
+
+
+    <style name="valorNum">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textAlignment">viewEnd</item>
+    </style>
+
+
+
+    <style name="botonComa">
+        <item name="android:backgroundTint">#626262</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+
+
+
+
+
+</resources>
