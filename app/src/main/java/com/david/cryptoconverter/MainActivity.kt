@@ -132,6 +132,15 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    //Poner a 0
+
+    fun clicCE(view: View){
+
+        textView.text = "0"
+
+    }
+
+
     //Funcion de cada numero
      fun clicNumero(view: View){
 
