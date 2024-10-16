@@ -10,7 +10,10 @@
     <string name="btn8">8</string>
     <string name="btn9">9</string>
     <string name="btn0">0</string>
-    <string name="btnComa">,</string>
+    <string name="btnComa">.</string>
     <string name="btnCE">CE</string>
     <string name="btnDel">&lt;</string>
+    <string name="introPrecio">Enter the value in Euros</string>
+    <string name="aceptar">Accept</string>
+    <string name="cancel">Cancel</string>
 </resources>
