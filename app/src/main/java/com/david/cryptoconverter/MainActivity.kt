@@ -51,6 +51,12 @@ class MainActivity : AppCompatActivity() {
             hayComa = savedInstanceState.getBoolean("hayComa", false)
             cifrasComa = savedInstanceState.getInt("cifrasComa", 0)
             botonSeleccionadoId = savedInstanceState.getInt("botonSeleccionadoId", -1)
+
+            val mapSerializable = savedInstanceState.getSerializable("criptomonedasMap") as? Map<String, criptomoneda>
+            if (mapSerializable != null) {
+                criptomonedasMap.clear()
+                criptomonedasMap.putAll(mapSerializable)
+            }
         }
 
 
@@ -74,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("cifrasComa", cifrasComa)
         outState.putInt("botonSeleccionadoId",botonSeleccionadoId)
 
+        outState.putSerializable("criptomonedasMap", HashMap(criptomonedasMap))
 
     }
 
@@ -195,7 +202,7 @@ class MainActivity : AppCompatActivity() {
                 if (hayComa == false){
                     hayComa=true
                     var tamanoTexto = textView.text.toString().length
-                    if (tamanoTexto < 15){
+                    if (tamanoTexto < 14){
 
                         textView.text = textView.text.toString() + botonNum
                     }

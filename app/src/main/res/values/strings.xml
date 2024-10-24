@@ -18,4 +18,5 @@
     <string name="cancel">Cancel</string>
     <string name="warnNoCrypto">No Crypto selected</string>
     <string name="comas">You can\'t do this</string>
+    <string name="euro" >€</string>
 </resources>

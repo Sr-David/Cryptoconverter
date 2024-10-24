@@ -19,4 +19,5 @@
     <string name="cancel">Annuler</string>
     <string name="warnNoCrypto">Sélectionnez une crypto-monnaie</string>
     <string name="comas">Je ne peux pas faire ça</string>
+    <string name="euro" >€</string>
 </resources>

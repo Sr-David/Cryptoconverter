@@ -231,6 +231,14 @@
         app:layout_constraintGuide_percent="0.26" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.16" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVert1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -253,6 +261,22 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp"
         app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -322,7 +346,7 @@
         android:id="@+id/cryptoValue"
         style="@style/valorCrypto"
         android:layout_width="366dp"
-        android:layout_height="99dp"
+        android:layout_height="0dp"
         android:autoSizeMaxTextSize="60sp"
         android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
@@ -336,15 +360,16 @@
     <TextView
         android:id="@+id/numeroEntrado"
         style="@style/valorNum"
-        android:layout_width="364dp"
-        android:layout_height="68dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="bottom"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/guidelinenums2"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineVertUlt"
-        app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="@+id/guidelineVert1"
-        app:layout_constraintTop_toTopOf="@+id/guidelinenums" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelinenums"
+        app:layout_constraintVertical_bias="0.8" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
@@ -417,5 +442,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="#003CFF33"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/valorNum"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="bottom"
+        android:text="@string/euro"
+        app:layout_constraintBottom_toTopOf="@+id/guidelinenums2"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="@+id/guidelinenums" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
