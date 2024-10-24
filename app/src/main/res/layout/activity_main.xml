@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/portraitLayout"
+    style="@style/temaFondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1F1F1F"
@@ -55,12 +56,13 @@
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
     <Button
-        android:id="@+id/btnComa"
+        android:id="@+id/btnComma"
         style="@style/botonComa"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
+        android:onClick="clicComa"
         android:text="@string/btnComa"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -178,11 +180,25 @@
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
+        android:onClick="borrar"
         android:text="@string/btnDel"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertUlt"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/btnCE" />
+
+    <Button
+        android:id="@+id/btnDel2"
+        style="@style/botonCE"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:onClick="borrar"
+        android:text="@string/btnDel"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/btnCE"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/numBoton0"
@@ -307,6 +323,9 @@
         style="@style/valorCrypto"
         android:layout_width="366dp"
         android:layout_height="99dp"
+        android:autoSizeMaxTextSize="60sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/guidelinenums3"
@@ -317,8 +336,8 @@
     <TextView
         android:id="@+id/numeroEntrado"
         style="@style/valorNum"
-        android:layout_width="359dp"
-        android:layout_height="90dp"
+        android:layout_width="364dp"
+        android:layout_height="68dp"
         android:gravity="bottom"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/guidelinenums2"
@@ -387,11 +406,11 @@
     </HorizontalScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/addBtn"
+        style="@style/botonNumero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        app:backgroundTint="#3CFF33"
         app:layout_constraintBottom_toTopOf="@+id/guidelinenums"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertUlt"
         app:layout_constraintStart_toEndOf="@+id/horizontalScrollView"

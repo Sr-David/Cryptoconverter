@@ -14,6 +14,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,9 +24,12 @@ class MainActivity : AppCompatActivity() {
 
     var criptoSeleccionada: String = ""
     private lateinit var textView: TextView
+    private lateinit var textCrypto: TextView
+    var botonSeleccionadoId: Int = -1
 
-    // Mapa para almacenar las criptomonedas creadas
     private val criptomonedasMap = mutableMapOf<String, criptomoneda>()
+    var hayComa = false
+    var cifrasComa = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,41 +41,76 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         textView = findViewById<TextView>(R.id.numeroEntrado)
+        textCrypto = findViewById<TextView>(R.id.cryptoValue)
+
+
+        if (savedInstanceState != null) {
+            criptoSeleccionada = savedInstanceState.getString("criptoSeleccionada", "")
+            textView.text = savedInstanceState.getString("textViewText", "0")
+            textCrypto.text = savedInstanceState.getString("textCryptoText", "0")
+            hayComa = savedInstanceState.getBoolean("hayComa", false)
+            cifrasComa = savedInstanceState.getInt("cifrasComa", 0)
+            botonSeleccionadoId = savedInstanceState.getInt("botonSeleccionadoId", -1)
+        }
+
+
+
+        if (botonSeleccionadoId != -1){
+
+            val botonSeleccionado = findViewById<View>(botonSeleccionadoId)
+            botonSeleccionado.setBackgroundColor(Color.parseColor("#3CFF33"))
+
+        }
+
+
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("criptoSeleccionada", criptoSeleccionada)
+        outState.putString("textViewText", textView.text.toString())
+        outState.putString("textCryptoText", textCrypto.text.toString())
+        outState.putBoolean("hayComa", hayComa)
+        outState.putInt("cifrasComa", cifrasComa)
+        outState.putInt("botonSeleccionadoId",botonSeleccionadoId)
+
+
+    }
+
 
 
 
     // Métodos de selección de criptomonedas
     fun btcSelect(view: View) {
-        val nombre = "Bitcoin"
-
-        cambiarColorBoton(view)
-        mostrarAlertaPrecio(nombre)
-        criptoSeleccionada = nombre
+        seleccionarCripto(view, "Bitcoin")
     }
 
     fun etheriumSelect(view: View) {
-        val nombre = "Etherium"
-
-        cambiarColorBoton(view)
-        mostrarAlertaPrecio(nombre)
-        criptoSeleccionada = nombre
+        seleccionarCripto(view, "Etherium")
     }
 
     fun tetherSelect(view: View) {
-        val nombre = "Tether"
-
-        cambiarColorBoton(view)
-        mostrarAlertaPrecio(nombre)
-        criptoSeleccionada = nombre
+        seleccionarCripto(view, "Tether")
     }
 
     fun xrpSelect(view: View) {
-        val nombre = "XRP"
+        seleccionarCripto(view, "XRP")
+    }
 
+
+    private fun seleccionarCripto(view: View, nombre: String) {
         cambiarColorBoton(view)
-        mostrarAlertaPrecio(nombre)
+
+        textCrypto.text = "0"
+        textView.text = "0"
+        if (criptomonedasMap.containsKey(nombre)) {
+            toastCrypto(nombre)
+        } else {
+            mostrarAlertaPrecio(nombre, true)
+        }
+
         criptoSeleccionada = nombre
+        botonSeleccionadoId = view.id
     }
 
 
@@ -85,15 +125,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun manejarSeleccionCripto(nombre: String) {
-        val cripto = criptomonedasMap[nombre]
-        if (cripto == null) {
-           mostrarAlertaPrecio(nombre)
-        } else {
-
-            toastCrypto("$nombre")
-        }
-    }
 
     private fun toastCrypto(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
@@ -103,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun mostrarAlertaPrecio(nombre: String) {
+    private fun mostrarAlertaPrecio(nombre: String, nueva: Boolean) {
         val edtDada = EditText(this).apply {
             inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         }
@@ -118,10 +149,16 @@ class MainActivity : AppCompatActivity() {
 
                 val valorIntroducido = edtDada.text.toString().toDoubleOrNull()
                 if (valorIntroducido != null) {
+                    if (nueva == true){
+                        val nuevaCripto = criptomoneda(valorIntroducido, nombre)
+                        criptomonedasMap[nombre] = nuevaCripto
+                        toastCrypto(" $nombre ha sido creado")
+                    }else{
 
-                    val nuevaCripto = criptomoneda(valorIntroducido, nombre)
-                    criptomonedasMap[nombre] = nuevaCripto  //SE CREA EL OBJETO DENTRO DEL ARRAY
-                    toastCrypto(" $nombre ha sido creado")
+                        criptomonedasMap[nombre]?.valor = valorIntroducido
+
+                    }
+
 
                 } else {
                     println("No se ha introducido un valor válido.")
@@ -132,11 +169,12 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    //Poner a 0
-
     fun clicCE(view: View){
 
         textView.text = "0"
+        textCrypto.text = "0"
+        hayComa = false
+        cifrasComa = 0
 
     }
 
@@ -144,34 +182,105 @@ class MainActivity : AppCompatActivity() {
     //Funcion de cada numero
      fun clicNumero(view: View){
 
-        val numActual: Double = textView.text.toString().toDouble()
+        var numero = textView.text.toString()
+        numero = numero.replace(",",".")
+        var numActual = numero.toDouble()
         val botonNum = (view as Button).text.toString()
 
-        if (numActual == 0.0){
 
-            textView.text = botonNum
+        if(criptoSeleccionada != ""){
+
+            if (botonNum == ","){
+
+                if (hayComa == false){
+                    hayComa=true
+                    var tamanoTexto = textView.text.toString().length
+                    if (tamanoTexto < 15){
+
+                        textView.text = textView.text.toString() + botonNum
+                    }
+
+                }
+
+            }else{
+                if (numActual == 0.0){
+
+                    textView.text = botonNum
+
+                }else{
+                    if (cifrasComa < 2){
+                        if (hayComa){
+                            ++cifrasComa
+                        }
+                        var tamanoTexto = textView.text.toString().length
+                        if (tamanoTexto < 15){
+
+                            textView.text = textView.text.toString() + botonNum
+                        }
+                    }
+
+                }
+            }
+
+
+
+            numero = textView.text.toString().replace(",",".")
+            numActual = numero.toDouble()
+            convertir(numActual)
 
         }else{
-            var tamanoTexto = textView.text.toString().length
-            if (tamanoTexto < 10){
-
-                textView.text = textView.text.toString() + botonNum
-
-            }
+            val mensaje = getString(R.string.warnNoCrypto)
+            toastCrypto(mensaje)
         }
 
 
     }
 
 
-    //Funcion a llamar cada vez que se añade un valor
-    //private fun convertir(){
+    fun clicComa(view: View){
+
+        var botonClic = (view as Button).text.toString()
+        if (hayComa == false){
+
+            textView.text = textView.text.toString() + botonClic
+            hayComa = true
+        }
+    }
+
+    fun borrar(view: View){
+
+        if(textView.text.length > 1){
+
+            if (textView.text.last() == ','){
+                hayComa = false
+            }
+            if (cifrasComa > 0){ cifrasComa --}
+            textView.text = textView.text.dropLast(1)
+        }else{
+            textView.text = "0"
+        }
+
+        var valor = textView.text.toString().replace(",",".")
+        val valorNum = valor.toDouble()
+        convertir(valorNum)
+
+    }
 
 
 
 
+    private fun convertir(numActual: Double) {
+        val valorCriptomoneda: Double? = criptomonedasMap[criptoSeleccionada]?.valor
+        val resultado: Double = if (valorCriptomoneda != null) numActual / valorCriptomoneda else 0.0
+        val resultadoBien: Double = BigDecimal(resultado).setScale(6, RoundingMode.HALF_UP).toDouble()
 
-    //}
+
+        textCrypto.text = String.format("%.6f", resultadoBien).replace(".", ",")
+    }
+
+
+
+
 
 
 }

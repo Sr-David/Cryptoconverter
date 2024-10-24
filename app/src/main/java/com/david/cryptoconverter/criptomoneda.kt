@@ -1,6 +1,8 @@
 package com.david.cryptoconverter
 
-class criptomoneda(val valor: Double, val nom: String) {
+import java.io.Serializable
+
+class criptomoneda(var valor: Double, val nom: String): Serializable {
 
 
 

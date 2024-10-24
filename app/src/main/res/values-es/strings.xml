@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cryptoconverter</string>
     <string name="btn1">1</string>
@@ -13,9 +14,11 @@
     <string name="btnComa">,</string>
     <string name="btnCE">CE</string>
     <string name="btnDel">&lt;</string>
-    <string name="introPrecio">Enter the unit value in Euros</string>
-    <string name="aceptar">Accept</string>
-    <string name="cancel">Cancel</string>
-    <string name="warnNoCrypto">No Crypto selected</string>
-    <string name="comas">You can\'t do this</string>
+    <string name="introPrecio">Introduzca el valor unitario en euros</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="warnNoCrypto">Seleccione una criptomoneda</string>
+    <string name="comas">No puede hacer esto</string>
+
+
 </resources>
