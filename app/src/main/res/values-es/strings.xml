@@ -20,6 +20,7 @@
     <string name="warnNoCrypto">Seleccione una criptomoneda</string>
     <string name="comas">No puede hacer esto</string>
     <string name="euro" >€</string>
-
+    <string name="edit">Seleccione una moneda para cambiar su valor</string>
+    <string name="editTitle">Modifica los valores</string>
 
 </resources>

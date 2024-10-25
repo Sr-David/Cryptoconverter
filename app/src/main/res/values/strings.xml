@@ -19,4 +19,6 @@
     <string name="warnNoCrypto">No Crypto selected</string>
     <string name="comas">You can\'t do this</string>
     <string name="euro" >€</string>
+    <string name="edit">Select a crypto to change its value</string>
+    <string name="editTitle">Change the values</string>
 </resources>

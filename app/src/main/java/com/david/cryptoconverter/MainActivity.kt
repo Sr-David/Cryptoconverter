@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textCrypto: TextView
     var botonSeleccionadoId: Int = -1
 
+
     private val criptomonedasMap = mutableMapOf<String, criptomoneda>()
     var hayComa = false
     var cifrasComa = 0
@@ -137,7 +138,44 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 
+    fun editarValor(view: View){
 
+
+        val edtDada = EditText(this).apply {
+            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        }
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.editTitle))
+            .setMessage(R.string.introPrecio)
+            .setView(edtDada)
+
+            .setNeutralButton(R.string.cancel) { dialog, which ->
+            }
+            .setPositiveButton(R.string.aceptar) { dialog, which ->
+
+                val valorIntroducido = edtDada.text.toString().toDoubleOrNull()
+                if (valorIntroducido != null) {
+
+                    criptomonedasMap["Bitcoin"]?.valor = valorIntroducido
+
+
+
+                }
+            }.
+        show()
+
+
+
+
+
+
+
+
+
+
+
+    }
 
 
 
@@ -159,7 +197,7 @@ class MainActivity : AppCompatActivity() {
                     if (nueva == true){
                         val nuevaCripto = criptomoneda(valorIntroducido, nombre)
                         criptomonedasMap[nombre] = nuevaCripto
-                        toastCrypto(" $nombre ha sido creado")
+
                     }else{
 
                         criptomonedasMap[nombre]?.valor = valorIntroducido
@@ -167,8 +205,6 @@ class MainActivity : AppCompatActivity() {
                     }
 
 
-                } else {
-                    println("No se ha introducido un valor válido.")
                 }
             }
             .show()
