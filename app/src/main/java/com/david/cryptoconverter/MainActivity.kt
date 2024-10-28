@@ -19,7 +19,7 @@ import java.math.RoundingMode
 
 class MainActivity : AppCompatActivity() {
 
-    // Lista de IDs de los botones de criptomonedas
+
     private val listaCryptos = listOf(R.id.btc_boton, R.id.etherium_btn, R.id.tether_btn, R.id.xrp_btn)
 
     var criptoSeleccionada: String = ""
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    // Métodos de selección de criptomonedas
+
     fun btcSelect(view: View) {
         seleccionarCripto(view, "Bitcoin")
     }
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
     private fun cambiarColorBoton(view: View) {
 
         listaCryptos.forEach { id ->
-            findViewById<View>(id).setBackgroundColor(Color.parseColor("#1F1F1F"))
+            findViewById<View>(id).setBackgroundColor(Color.TRANSPARENT)
         }
         view.setBackgroundColor(Color.parseColor("#3CFF33"))
     }
@@ -138,38 +138,45 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 
+
+
     fun editarValor(view: View){
 
 
-        val edtDada = EditText(this).apply {
-            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-        }
+        if (criptoSeleccionada == ""){
 
-        MaterialAlertDialogBuilder(this)
-            .setTitle(getString(R.string.editTitle))
-            .setMessage(R.string.introPrecio)
-            .setView(edtDada)
+            var edit = getString(R.string.edit)
+            toastCrypto(edit)
 
-            .setNeutralButton(R.string.cancel) { dialog, which ->
+
+        }else{
+
+            val edtDada = EditText(this).apply {
+                inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
             }
-            .setPositiveButton(R.string.aceptar) { dialog, which ->
 
-                val valorIntroducido = edtDada.text.toString().toDoubleOrNull()
-                if (valorIntroducido != null) {
+            MaterialAlertDialogBuilder(this)
+                .setTitle(criptoSeleccionada + ": " + getString(R.string.editTitle))
+                .setMessage(R.string.introPrecio)
+                .setView(edtDada)
 
-                    criptomonedasMap["Bitcoin"]?.valor = valorIntroducido
-
-
-
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                 }
-            }.
-        show()
+                .setPositiveButton(R.string.aceptar) { dialog, which ->
+
+                    val valorIntroducido = edtDada.text.toString().toDoubleOrNull()
+                    if (valorIntroducido != null) {
+
+                        criptomonedasMap[criptoSeleccionada]?.valor = valorIntroducido
+
+                        val num = textView.text.toString().toDouble()
+                        convertir(num)
 
 
+                    }
+                }.show()
 
-
-
-
+        }
 
 
 

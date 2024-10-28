@@ -401,7 +401,7 @@
                 android:id="@+id/btc_boton"
                 android:layout_width="71dp"
                 android:layout_height="70dp"
-                android:background="#00000000"
+                android:background="@android:color/transparent"
                 android:onClick="btcSelect"
                 android:tag="Bitcoin"
                 app:srcCompat="@mipmap/btc_img_foreground" />
@@ -411,7 +411,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@android:color/transparent"
                 android:onClick="etheriumSelect"
                 app:srcCompat="@mipmap/etherium_img_round" />
 
@@ -420,7 +420,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@android:color/transparent"
                 android:onClick="tetherSelect"
                 app:srcCompat="@mipmap/btc_img" />
 
@@ -429,7 +429,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@android:color/transparent"
                 android:onClick="xrpSelect"
                 app:srcCompat="@mipmap/xrp_img" />
 
